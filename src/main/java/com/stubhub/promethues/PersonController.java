@@ -2,9 +2,7 @@ package com.stubhub.promethues;
 
 import org.springframework.metrics.annotation.Timed;
 import org.springframework.metrics.instrument.MeterRegistry;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -33,5 +31,16 @@ class PersonController {
     @GetMapping("/api/person/")
     public Person findPerson(@PathVariable Integer id) {
         return people.get(id);
+    }
+
+
+    @PostMapping("/api/person")
+    public String addPerson(@RequestBody Person person) {
+        Integer Key = person.getId().intValue();
+        if(people.get(Key)!=null){
+            throw new RuntimeException("Person exist already");
+        }
+        people.put(person.getId().intValue(),person);
+        return "Add Person Successfully";
     }
 }
