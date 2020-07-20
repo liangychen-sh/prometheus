@@ -28,7 +28,7 @@ class PersonController {
         return persons;
     }
 
-    @GetMapping("/api/person/")
+    @GetMapping("/api/person/{id}")
     public Person findPerson(@PathVariable Integer id) {
         return people.get(id);
     }
@@ -40,7 +40,22 @@ class PersonController {
         if(people.get(Key)!=null){
             throw new RuntimeException("Person exist already");
         }
+        if(Key==0){
+            people.clear();
+            return "Add Person Successfully";
+        }
         people.put(person.getId().intValue(),person);
         return "Add Person Successfully";
+    }
+
+    @GetMapping("/error/test")
+    public String exceptionApi() {
+        throw new RuntimeException("Error Test");
+    }
+
+    @GetMapping("/api/clear")
+    public String clear(){
+        people.clear();
+        return "Clear map successfully";
     }
 }
