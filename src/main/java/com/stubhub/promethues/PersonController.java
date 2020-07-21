@@ -55,6 +55,12 @@ class PersonController {
 
     @GetMapping("/api/clear")
     public String clear(){
+
+        try {
+            Thread.sleep(1000);
+        }catch (Exception e){
+
+        }
         people.clear();
         return "Clear map successfully";
     }
