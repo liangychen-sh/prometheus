@@ -50,7 +50,12 @@ public class ScheduleJob {
         }
 
         ResponseEntity entity = restTemplate.getForEntity("http://localhost:8080/prom/api/clear",String.class);
+        ResponseEntity timerEntity = restTemplate.getForEntity("http://localhost:8080/prom/timer_test",String.class);
+        ResponseEntity histogramEntity = restTemplate.getForEntity("http://localhost:8080/prom/histogram", String.class);
+
+        log.info("{}",timerEntity.getBody().toString());
         log.info("{}", entity.getBody().toString());
+        log.info("{}", histogramEntity.getBody().toString());
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
 }
