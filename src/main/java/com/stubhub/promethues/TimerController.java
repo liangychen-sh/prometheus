@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TimerController {
 
 
-    @Timed(value="timer_test_duration", quantiles = {0.5,1,2,3})
+    @Timed(value="timer_test_duration")
     @RequestMapping(method= RequestMethod.GET,value="/timer_test")
     public String timerConsumeOneSeconds(){
 
